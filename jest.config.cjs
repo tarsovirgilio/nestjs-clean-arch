@@ -5,22 +5,18 @@ const { compilerOptions } = require('./tsconfig.json');
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  globals: {
-    'ts-jest': {
-      tsconfig: 'tsconfig.json',
-      diagnostics: false,
-    },
-  },
   moduleFileExtensions: ['js', 'json', 'ts'],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths || {}, {
     prefix: '<rootDir>/',
   }),
   testRegex: '.*\\..*spec\\.ts$',
   transform: {
-    '^.+\\.(t|j)s$': 'ts-jest',
+    '^.+\\.(t|j)s$': [
+      'ts-jest',
+      { tsconfig: 'tsconfig.json', diagnostics: false },
+    ],
   },
-  // Permite transformar o pacote ESM @faker-js/faker (ou outros que precisar)
-  transformIgnorePatterns: ['/node_modules/(?!(?:@faker-js/faker)/)'],
+  transformIgnorePatterns: ['/node_modules/(?!(?:@faker-js/faker|uuid)/)'],
   collectCoverageFrom: ['**/*.(t|j)s'],
   coverageDirectory: './coverage',
 };
