@@ -36,4 +36,11 @@ export default tseslint.config(
       'prettier/prettier': ['error', { endOfLine: 'auto' }],
     },
   },
+  {
+    files: ['**/jest.config.*', '**/*.cjs', '**/*.config.*'],
+    rules: {
+      'import/no-commonjs': 'off',
+      '@typescript-eslint/no-var-requires': 'off',
+    },
+  },
 );
